@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#1a0b45">
+<title>ERE Arcade</title>
+<link rel="stylesheet" href="p10.css">
+</head>
+<body>
+<div id="app">
+  <button id="muteBtn" class="icon-btn" aria-label="Mute or unmute sound" title="Sound">🔊</button>
+
+  <!-- Welcome -->
+  <section id="welcome" class="screen active">
+    <div class="heads" id="welcomeHeads"></div>
+    <h1 class="logo"><span>ERE</span><span>ARCADE</span></h1>
+    <button class="btn pink big" id="startBtn">Start</button>
+  </section>
+
+  <!-- Character selection -->
+  <section id="select" class="screen">
+    <h2 class="title">Pick your face</h2>
+    <div class="players">
+      <div class="pick" data-p="0">
+        <h3 class="p1">Choose your character</h3>
+        <div class="cards" id="cards0"></div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn ghost" data-go="welcome">Back</button>
+      <button class="btn cyan" id="toGames" disabled>Choose a game</button>
+    </div>
+  </section>
+
+  <!-- Game selection -->
+  <section id="games" class="screen">
+    <h2 class="title">Pick a game</h2>
+    <div class="gamecards">
+      <button class="gcard flappy" data-game="flappy">
+        <b>Flappy</b>
+        <small>Tap to flap through the pipes</small>
+        <i class="best" id="bestF"></i>
+      </button>
+      <button class="gcard dino" data-game="dino">
+        <b>Dino</b>
+        <small>Jump the cacti and flying birds</small>
+        <i class="best" id="bestD"></i>
+      </button>
+      <button class="gcard messi" data-game="messi">
+        <b>Ankara Messi</b>
+        <small>Dribble past the defenders and score</small>
+      </button>
+    </div>
+    <button class="btn ghost" data-go="select">Back</button>
+  </section>
+
+  <!-- Gameplay -->
+  <section id="play" class="screen">
+    <div class="hud">
+      <button class="btn small ghost" id="homeBtn2">Home</button>
+      <div class="turn" id="turnLabel"></div>
+      <div class="scores"><span id="scoreNow">0</span><small id="bestNow">Best 0</small></div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="cv" width="360" height="560"></canvas>
+      <div class="over" id="overPanel" hidden>
+        <div class="panel">
+          <h2 id="overTitle">Game Over</h2>
+          <p class="who" id="overWho"></p>
+          <div class="big-score"><span id="overScore">0</span><small>Score</small></div>
+          <p class="meta" id="overBest"></p>
+          <p class="meta" id="overBoth"></p>
+          <div class="row">
+            <button class="btn pink" id="restartBtn">Restart</button>
+            <button class="btn ghost" id="homeBtn">Home</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="joy" aria-label="Joystick"><div id="knob"></div></div>
+    <button class="btn big action" id="actBtn">Flap</button>
+    <p class="hint" id="hintTxt">Space, Up Arrow, click or tap</p>
+  </section>
+</div>
+<script src="p10.js"></script>
+</body>
+</html>

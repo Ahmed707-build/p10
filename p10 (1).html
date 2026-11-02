@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#1a0b45">
+<title>ERE Arcade</title>
+<link rel="stylesheet" href="p10.css">
+</head>
+<body>
+<div id="app">
+  <button id="muteBtn" class="icon-btn" aria-label="Mute or unmute sound" title="Sound">🔊</button>
+
+  <!-- Welcome -->
+  <section id="welcome" class="screen active">
+    <svg class="cab" viewBox="0 0 220 280" role="img" aria-label="Arcade machine">
+      <defs>
+        <linearGradient id="gBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5c9a"/><stop offset="1" stop-color="#b5124f"/></linearGradient>
+        <linearGradient id="gSide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a3dff"/><stop offset="1" stop-color="#2f1585"/></linearGradient>
+        <linearGradient id="gTop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffe56b"/><stop offset="1" stop-color="#ff9f1c"/></linearGradient>
+        <linearGradient id="gScr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2cf5ff"/><stop offset="1" stop-color="#3a5bff"/></linearGradient>
+        <radialGradient id="gBall" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ff9aa8"/><stop offset="1" stop-color="#e0103a"/></radialGradient>
+      </defs>
+      <ellipse cx="110" cy="271" rx="92" ry="8" fill="rgba(0,0,0,.35)"/>
+      <polygon points="170,40 204,56 204,262 170,262" fill="url(#gSide)"/>
+      <polygon points="28,40 170,40 204,56 62,56" fill="url(#gTop)"/>
+      <rect x="28" y="40" width="142" height="222" rx="6" fill="url(#gBody)"/>
+      <rect x="36" y="46" width="126" height="32" rx="5" fill="#2a1466"/>
+      <text x="99" y="69" text-anchor="middle" font-size="21" font-weight="900" fill="#ffe56b" font-family="Arial Rounded MT Bold,Trebuchet MS,system-ui,sans-serif" letter-spacing="3">PLAY</text>
+      <rect x="40" y="86" width="118" height="88" rx="9" fill="#1a0b45"/>
+      <rect x="47" y="93" width="104" height="74" rx="6" fill="url(#gScr)"/>
+      <rect x="55" y="108" width="6" height="26" rx="2" fill="#fff"/><rect x="137" y="124" width="6" height="26" rx="2" fill="#fff"/>
+      <circle cx="99" cy="128" r="6" fill="#ffe56b"/>
+      <rect x="62" y="98" width="10" height="6" fill="#7dff6b"/><rect x="76" y="98" width="10" height="6" fill="#ff5c9a"/><rect x="90" y="98" width="10" height="6" fill="#ffe56b"/><rect x="104" y="98" width="10" height="6" fill="#7dff6b"/><rect x="118" y="98" width="10" height="6" fill="#ff5c9a"/>
+      <polygon points="28,182 170,182 204,198 62,198" fill="#ffd23f" opacity=".95"/>
+      <rect x="28" y="182" width="142" height="40" rx="4" fill="#2a1466"/>
+      <rect x="28" y="182" width="142" height="5" fill="rgba(255,255,255,.25)"/>
+      <line x1="58" y1="212" x2="58" y2="196" stroke="#cfd3ff" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="58" cy="192" r="10" fill="url(#gBall)"/>
+      <circle cx="100" cy="204" r="8" fill="#ffe56b"/><circle cx="122" cy="204" r="8" fill="#2cf5ff"/><circle cx="144" cy="204" r="8" fill="#7dff6b"/>
+      <circle cx="97" cy="201" r="2.6" fill="rgba(255,255,255,.8)"/><circle cx="119" cy="201" r="2.6" fill="rgba(255,255,255,.8)"/><circle cx="141" cy="201" r="2.6" fill="rgba(255,255,255,.8)"/>
+      <rect x="66" y="232" width="66" height="24" rx="4" fill="#1a0b45"/>
+      <rect x="92" y="238" width="14" height="4" rx="2" fill="#ffe56b"/><rect x="72" y="246" width="54" height="3" rx="1.5" fill="#ff5c9a"/>
+      <rect x="170" y="60" width="2" height="200" fill="rgba(255,255,255,.18)"/>
+    </svg>
+    <h1 class="logo"><span>ERE</span><span>ARCADE</span></h1>
+    <button class="btn pink big" id="startBtn">Start</button>
+  </section>
+
+  <!-- Character selection -->
+  <section id="select" class="screen">
+    <h2 class="title">Pick your face</h2>
+    <div class="players">
+      <div class="pick" data-p="0">
+        <h3 class="p1">Choose your character</h3>
+        <div class="cards" id="cards0"></div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn ghost" data-go="welcome">Back</button>
+      <button class="btn cyan" id="toGames" disabled>Choose a game</button>
+    </div>
+  </section>
+
+  <!-- Game selection -->
+  <section id="games" class="screen">
+    <h2 class="title">Pick a game</h2>
+    <div class="gamecards">
+      <button class="gcard flappy" data-game="flappy">
+        <b>Flappy</b>
+        <small>Tap to flap through the pipes</small>
+        <i class="best" id="bestF"></i>
+      </button>
+      <button class="gcard dino" data-game="dino">
+        <b>Dino</b>
+        <small>Jump the cacti and flying birds</small>
+        <i class="best" id="bestD"></i>
+      </button>
+      <button class="gcard messi" data-game="messi">
+        <b>Ankara Messi</b>
+        <small>Dribble past the defenders and score</small>
+      </button>
+    </div>
+    <button class="btn ghost" data-go="select">Back</button>
+  </section>
+
+  <!-- Gameplay -->
+  <section id="play" class="screen">
+    <div class="hud">
+      <button class="btn small ghost" id="homeBtn2">Home</button>
+      <div class="turn" id="turnLabel"></div>
+      <div class="scores"><span id="scoreNow">0</span><small id="bestNow">Best 0</small></div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="cv" width="360" height="560"></canvas>
+      <div class="over" id="overPanel" hidden>
+        <div class="panel">
+          <h2 id="overTitle">Game Over</h2>
+          <p class="who" id="overWho"></p>
+          <div class="big-score"><span id="overScore">0</span><small>Score</small></div>
+          <p class="meta" id="overBest"></p>
+          <p class="meta" id="overBoth"></p>
+          <div class="row">
+            <button class="btn pink" id="restartBtn">Restart</button>
+            <button class="btn ghost" id="homeBtn">Home</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="joy" aria-label="Joystick"><div id="knob"></div></div>
+    <button class="btn big action" id="actBtn">Flap</button>
+    <p class="hint" id="hintTxt">Space, Up Arrow, click or tap</p>
+  </section>
+</div>
+<script src="p10.js"></script>
+</body>
+</html>
